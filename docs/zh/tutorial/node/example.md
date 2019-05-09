@@ -6,20 +6,19 @@
 
 
 ## 安装gvite
-
+```bash
 ### 下载安装
 
-```bash
 ## 下载
-curl -L -O https://github.com/vitelabs/go-vite/releases/download/v1.2.3-alpha.4/gvite-v1.2.3-alpha.4-linux.tar.gz
+https://github.com/vitelabs/go-vite/releases/download/v1.3.1-alpha.1/gvite-v1.3.1-alpha.1-linux.tar.gz
 ```
 ```
 ## 解压
-tar -xzvf gvite-v1.2.3-alpha.4-linux.tar.gz
+tar -xzvf gvite-v1.3.1-alpha.1-linux.tar.gz
 ```
 ```
 ## 修改文件名为vite, 进入解压目录，包含三个文件 gvite、bootstrap 和 node_config.json
-mv gvite-v1.2.3-alpha.4-linux vite
+mv gvite-v1.3.1-alpha.1-linux vite
 cd vite
 ```
 ```
@@ -344,3 +343,25 @@ setInterval(function(){vite.ledger_getSnapshotChainHeight();}, 1000)
 ```
 
 之后会每秒输出当前的区块高度，若要打断输入，请输入： `exit`，退出交互式命令行
+
+##增加防火墙规则
+```bash
+sudo ufw allow 8483:8484/tcp
+sudo ufw allow 8483:8484/udp
+```
+```
+
+##计划任务，防止服务卡死，定时每2小时重启一次服务
+```bash
+sudo crontab -e
+```
+```
+第一次运行选择3，vim编辑器，按i开始编辑，在尾部添加
+```bash
+
+0 */2 * * * sudo service vite stop
+1 */2 * * * sudo service vite start
+```
+```
+按:wq保存并退出vim
+
